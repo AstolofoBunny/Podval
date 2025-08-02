@@ -14,6 +14,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import BackButton from "@/components/back-button";
 import { useLanguage } from "@/hooks/useLanguage";
+import AccountSwitcher from "@/components/account-switcher";
 
 export default function Profile() {
   const { user, isAuthenticated, isLoading } = useAuth();
@@ -243,18 +244,7 @@ export default function Profile() {
                 </div>
                 
                 <div className="border-t pt-4">
-                  <h3 className="font-medium mb-2">Переключение аккаунтов</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Для тестирования используйте эти аккаунты:
-                  </p>
-                  <div className="space-y-2">
-                    <Button variant="outline" size="sm" className="w-full justify-start">
-                      👤 Обычный пользователь (user@contenthub.com)
-                    </Button>
-                    <Button variant="outline" size="sm" className="w-full justify-start">
-                      ⚡ Администратор (admin@contenthub.com)
-                    </Button>
-                  </div>
+                  <AccountSwitcher />
                 </div>
               </CardContent>
             </Card>

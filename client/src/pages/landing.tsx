@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import FirebaseAuth from "@/components/firebase-auth";
 
 export default function Landing() {
   return (
@@ -99,12 +100,7 @@ export default function Landing() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button 
-                onClick={() => window.location.href = '/api/login'}
-                className="w-full"
-              >
-                Sign Up Now
-              </Button>
+              <FirebaseAuth />
             </CardContent>
           </Card>
         </div>

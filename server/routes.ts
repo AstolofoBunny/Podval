@@ -410,6 +410,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Account switching for testing
+  app.post('/api/auth/switch-account', isAuthenticated, async (req: any, res) => {
+    try {
+      const { role } = req.body;
+      const userId = req.user.claims.sub;
+      
+      if (role === 'admin') {
+        await storage.updateUserAdminStatus(userId, true);
+      } else {
+        await storage.updateUserAdminStatus(userId, false);
+      }
+      
+      res.json({ message: `Switched to ${role} account`, role });
+    } catch (error) {
+      console.error("Error switching account:", error);
+      res.status(500).json({ message: "Failed to switch account" });
+    }
+  });
+
   // Admin routes
   app.get('/api/admin/users', isAuthenticated, async (req: any, res) => {
     try {

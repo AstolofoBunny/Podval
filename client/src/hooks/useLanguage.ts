@@ -18,6 +18,8 @@ export const translations = {
     createArticle: 'Create Article',
     myPosts: 'My Posts',
     getStarted: 'Get Started',
+    posts: 'Posts',
+    articles: 'Articles',
     
     // Forms
     title: 'Title',
@@ -26,6 +28,8 @@ export const translations = {
     category: 'Category',
     save: 'Save',
     cancel: 'Cancel',
+    name: 'Name',
+    color: 'Color',
     
     // Messages
     success: 'Success!',
@@ -36,7 +40,15 @@ export const translations = {
     language: 'Language',
     settings: 'Settings',
     english: 'English',
-    russian: 'Русский'
+    russian: 'Русский',
+    
+    // Admin
+    admin: 'Admin',
+    createCategory: 'Create Category',
+    categories: 'Categories',
+    switchToAdmin: 'Switch to Admin',
+    switchToUser: 'Switch to User',
+    accountSwitcher: 'Account Switcher'
   },
   ru: {
     // Navigation
@@ -53,6 +65,8 @@ export const translations = {
     createArticle: 'Создать статью',
     myPosts: 'Мои посты',
     getStarted: 'Начать',
+    posts: 'Посты',
+    articles: 'Статьи',
     
     // Forms
     title: 'Заголовок',
@@ -61,6 +75,8 @@ export const translations = {
     category: 'Категория',
     save: 'Сохранить',
     cancel: 'Отмена',
+    name: 'Название',
+    color: 'Цвет',
     
     // Messages
     success: 'Успех!',
@@ -71,7 +87,15 @@ export const translations = {
     language: 'Язык',
     settings: 'Настройки',
     english: 'English',
-    russian: 'Русский'
+    russian: 'Русский',
+    
+    // Admin
+    admin: 'Админ',
+    createCategory: 'Создать категорию',
+    categories: 'Категории',
+    switchToAdmin: 'Переключить на админа',
+    switchToUser: 'Переключить на пользователя',
+    accountSwitcher: 'Переключатель аккаунтов'
   }
 };
 

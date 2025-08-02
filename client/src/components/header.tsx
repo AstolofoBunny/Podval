@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/hooks/useLanguage";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -17,6 +18,7 @@ export default function Header() {
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
+  const { t } = useLanguage();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,17 +38,22 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-slate-700 hover:text-brand-600 font-medium transition-colors">
-              Home
+              {t('home')}
             </Link>
             <span className="text-slate-700 hover:text-brand-600 font-medium transition-colors cursor-pointer">
-              Categories
+              {t('categories')}
             </span>
             <Link href="/about" className="text-slate-700 hover:text-brand-600 font-medium transition-colors">
-              About
+              {t('about')}
             </Link>
             <Link href="/contact" className="text-slate-700 hover:text-brand-600 font-medium transition-colors">
-              Contact
+              {t('contact')}
             </Link>
+            {isAuthenticated && (user as any)?.isAdmin && (
+              <Link href="/admin/categories" className="text-slate-700 hover:text-brand-600 font-medium transition-colors">
+                {t('admin')}
+              </Link>
+            )}
           </nav>
 
           {/* User Actions */}
