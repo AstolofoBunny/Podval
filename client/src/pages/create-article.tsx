@@ -49,7 +49,7 @@ export default function CreateArticle() {
 
   const createArticleMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await fetch("/api/posts", {
+      const response = await fetch("/api/articles", {
         method: "POST",
         body: data,
         credentials: "include",

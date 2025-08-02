@@ -5,16 +5,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { apiRequest } from "@/lib/queryClient";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import BackButton from "@/components/back-button";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export default function Profile() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const { toast } = useToast();
+  const { language, setLanguage, t } = useLanguage();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -119,10 +123,18 @@ export default function Profile() {
     <div className="min-h-screen bg-slate-50 py-8">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <BackButton />
-        <Card>
-          <CardHeader>
-            <CardTitle>Profile Settings</CardTitle>
-          </CardHeader>
+        
+        <Tabs defaultValue="profile" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="profile">{t('profile')}</TabsTrigger>
+            <TabsTrigger value="settings">{t('settings')}</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="profile">
+            <Card>
+              <CardHeader>
+                <CardTitle>Profile Settings</CardTitle>
+              </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Profile Image */}
@@ -209,6 +221,45 @@ export default function Profile() {
             </form>
           </CardContent>
         </Card>
+          </TabsContent>
+          
+          <TabsContent value="settings">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('settings')}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <Label htmlFor="language">{t('language')}</Label>
+                  <Select value={language} onValueChange={(value: 'en' | 'ru') => setLanguage(value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите язык" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="en">{t('english')}</SelectItem>
+                      <SelectItem value="ru">{t('russian')}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="border-t pt-4">
+                  <h3 className="font-medium mb-2">Переключение аккаунтов</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Для тестирования используйте эти аккаунты:
+                  </p>
+                  <div className="space-y-2">
+                    <Button variant="outline" size="sm" className="w-full justify-start">
+                      👤 Обычный пользователь (user@contenthub.com)
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-full justify-start">
+                      ⚡ Администратор (admin@contenthub.com)
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

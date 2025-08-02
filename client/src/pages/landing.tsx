@@ -9,7 +9,7 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-brand-700">ContentHub</h1>
-            <Button onClick={() => window.location.href = '/api/login'}>
+            <Button onClick={() => window.location.href = '/firebase-test'}>
               Sign In
             </Button>
           </div>
@@ -28,7 +28,7 @@ export default function Landing() {
           </p>
           <Button 
             size="lg" 
-            onClick={() => window.location.href = '/api/login'}
+            onClick={() => window.location.href = '/firebase-test'}
             className="text-lg px-8 py-3"
           >
             Get Started

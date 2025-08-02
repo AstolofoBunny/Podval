@@ -232,6 +232,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...req.body,
         categoryId,
         authorId: userId,
+        published: req.body.published === 'true' || req.body.published === true,
         coverImage: req.file ? `/uploads/${req.file.filename}` : null,
       });
 
@@ -296,6 +297,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error deleting post:", error);
       res.status(500).json({ message: "Failed to delete post" });
+    }
+  });
+
+  // Articles (similar to posts but with type 'article')
+  app.post('/api/articles', isAuthenticated, upload.array('images', 10), async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      
+      // Handle category - create "Other" if not specified or doesn't exist
+      let categoryId = req.body.categoryId;
+      if (!categoryId || categoryId === '') {
+        let otherCategory = await storage.getCategoryByName('Other');
+        if (!otherCategory) {
+          otherCategory = await storage.createCategory({
+            name: 'Other',
+            description: 'Разные темы и общие посты',
+            color: 'gray',
+            isDefault: true
+          });
+        }
+        categoryId = otherCategory.id;
+      }
+      
+      const data = insertPostSchema.parse({
+        ...req.body,
+        categoryId,
+        authorId: userId,
+        type: 'article',
+        published: req.body.published === 'true' || req.body.published === true,
+        coverImage: null, // Articles don't have cover images in this implementation
+      });
+
+      const article = await storage.createPost(data);
+      
+      // Handle uploaded images if any
+      const files = req.files as Express.Multer.File[];
+      if (files && files.length > 0) {
+        for (const file of files) {
+          await storage.addPostFile(article.id, {
+            filename: file.filename,
+            originalName: file.originalname,
+            mimeType: file.mimetype,
+            size: file.size,
+          });
+        }
+      }
+      
+      res.json(article);
+    } catch (error) {
+      console.error("Error creating article:", error);
+      res.status(500).json({ message: "Failed to create article" });
     }
   });
 

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
+import BackButton from "@/components/back-button";
 
 export default function About() {
   const { data: aboutUsData } = useQuery({
@@ -10,6 +11,7 @@ export default function About() {
   return (
     <div className="min-h-screen bg-slate-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BackButton />
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-slate-900 mb-4">About ContentHub</h1>
