@@ -1,0 +1,41 @@
+Hi, please choose the best modern web technology stack to build the website, including programming language, framework, and libraries, based on the features described below. I want the site to be deployed on Vercel.
+
+I need a website that will be both beautiful and user-friendly, with a clean and modern design that makes navigation and reading easy and enjoyable.
+
+The main page should display a feed of posts. On this main page, users can switch to a Categories tab, where they can select a specific category to filter and view posts or articles related to that category.
+
+Each post or article page should show detailed content. Registered users should be able to create new posts or articles. I want to use Firebase for user registration and authentication.
+
+In a post, users should be able to upload any type of files, including a separate cover photo, a title, a full description, and a short description that will be visible before entering the full post. When a user opens a post, the full content will be displayed.
+
+Posts should have views and likes. Views will be counted when someone opens the post or if they like it without opening it, but only if a view hasn’t been counted yet for that user. It is important that the system can process and log IP addresses of viewers to properly count unique views and for hosting analytics.
+
+There will be two types of accounts: administrator and regular user. Admin access will be granted based on email addresses, for example, petro228man@gmail.com should automatically have admin privileges.
+
+Administrators will have the ability to delete others' posts and access a separate admin panel where they can create new categories and manage a list of users, including granting admin privileges.
+
+At the bottom of the main page, there should be sections like "About Us" (which only admins can edit) and "Contact Us", where users can send messages that will be forwarded to a pre-configured email address.
+
+Also, both posts and articles should support comments. For articles specifically, instead of uploading arbitrary files, users should be able to upload multiple images to make the content look visually appealing.
+
+To make this possible, please set up the following technologies and libraries for a beautiful and efficient site:
+
+Next.js — for React-based server-side rendering and easy routing.
+
+Firebase — for authentication (Auth), real-time database (Firestore), and file storage (Storage).
+
+Tailwind CSS — for fast, modern, and responsive styling.
+
+Headless UI — for accessible and customizable UI components.
+
+clsx — for managing conditional class names in React components.
+
+React Hook Form — for managing forms easily and cleanly.
+
+Framer Motion (optional) — to add smooth animations and improve UX.
+
+EmailJS or Formspree — to handle sending emails from the contact form.
+
+Server-side or middleware support for IP address processing and logging to enable accurate unique view counts and hosting analytics.
+
+The goal is to create a website that is not only fully functional but also visually pleasing and easy to navigate, with smooth interactions and a clean, consistent style throughout.
