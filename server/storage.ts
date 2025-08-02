@@ -28,6 +28,7 @@ export interface IStorage {
   // User operations (required for Replit Auth)
   getUser(id: string): Promise<User | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;
+  updateUser(id: string, data: Partial<UpsertUser>): Promise<User>;
   updateUserAdminStatus(id: string, isAdmin: boolean): Promise<void>;
   getAllUsers(): Promise<User[]>;
 
@@ -74,7 +75,7 @@ export class DatabaseStorage implements IStorage {
 
   async upsertUser(userData: UpsertUser): Promise<User> {
     // Check if user should be admin based on email
-    const adminEmails = ['petro228man@gmail.com']; // Add more admin emails as needed
+    const adminEmails = ['petro228man@gmail.com', 'lefaydarklevel@gmail.com']; // Add more admin emails as needed
     const isAdmin = userData.email ? adminEmails.includes(userData.email) : false;
 
     const [user] = await db
@@ -90,6 +91,11 @@ export class DatabaseStorage implements IStorage {
       })
       .returning();
     return user;
+  }
+
+  async updateUser(id: string, data: Partial<UpsertUser>): Promise<User> {
+    const [updated] = await db.update(users).set({ ...data, updatedAt: new Date() }).where(eq(users.id, id)).returning();
+    return updated;
   }
 
   async updateUserAdminStatus(id: string, isAdmin: boolean): Promise<void> {

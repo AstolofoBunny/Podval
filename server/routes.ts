@@ -40,6 +40,75 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Profile update route
+  app.post('/api/auth/update-profile', isAuthenticated, upload.single('profileImage'), async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { firstName, lastName } = req.body;
+      
+      let profileImageUrl;
+      if (req.file) {
+        profileImageUrl = `/uploads/${req.file.filename}`;
+      }
+
+      const updateData: any = {
+        firstName,
+        lastName,
+        updatedAt: new Date(),
+      };
+
+      if (profileImageUrl) {
+        updateData.profileImageUrl = profileImageUrl;
+      }
+
+      const updatedUser = await storage.updateUser(userId, updateData);
+      res.json(updatedUser);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      res.status(500).json({ message: "Failed to update profile" });
+    }
+  });
+
+  // My posts route
+  app.get('/api/posts/my-posts', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const userPosts = await storage.getUserPosts(userId);
+      res.json(userPosts);
+    } catch (error) {
+      console.error("Error fetching user posts:", error);
+      res.status(500).json({ message: "Failed to fetch user posts" });
+    }
+  });
+
+  // Contact form route
+  app.post('/api/contact', async (req, res) => {
+    try {
+      const { name, email, subject, message } = req.body;
+
+      // Email content
+      const mailOptions = {
+        from: email,
+        to: process.env.CONTACT_EMAIL || 'support@contenthub.com',
+        subject: `Contact Form: ${subject}`,
+        html: `
+          <h3>New Contact Form Submission</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        `,
+      };
+
+      await transporter.sendMail(mailOptions);
+      res.json({ message: "Message sent successfully" });
+    } catch (error) {
+      console.error("Error sending contact email:", error);
+      res.status(500).json({ message: "Failed to send message" });
+    }
+  });
+
   // Category routes
   app.get('/api/categories', async (req, res) => {
     try {

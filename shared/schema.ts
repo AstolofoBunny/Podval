@@ -41,6 +41,7 @@ export const categories = pgTable("categories", {
   name: varchar("name").notNull().unique(),
   description: text("description"),
   color: varchar("color").default("blue"),
+  isDefault: boolean("is_default").default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -53,6 +54,7 @@ export const posts = pgTable("posts", {
   authorId: varchar("author_id").notNull().references(() => users.id),
   categoryId: varchar("category_id").notNull().references(() => categories.id),
   published: boolean("published").default(true),
+  type: varchar("type", { enum: ["post", "article"] }).default("post"),
   viewCount: integer("view_count").default(0),
   likeCount: integer("like_count").default(0),
   createdAt: timestamp("created_at").defaultNow(),

@@ -41,12 +41,12 @@ export default function Header() {
             <span className="text-slate-700 hover:text-brand-600 font-medium transition-colors cursor-pointer">
               Categories
             </span>
-            <span className="text-slate-700 hover:text-brand-600 font-medium transition-colors cursor-pointer">
+            <Link href="/about" className="text-slate-700 hover:text-brand-600 font-medium transition-colors">
               About
-            </span>
-            <span className="text-slate-700 hover:text-brand-600 font-medium transition-colors cursor-pointer">
+            </Link>
+            <Link href="/contact" className="text-slate-700 hover:text-brand-600 font-medium transition-colors">
               Contact
-            </span>
+            </Link>
           </nav>
 
           {/* User Actions */}
@@ -136,12 +136,12 @@ export default function Header() {
                   <span className="text-slate-700 hover:text-brand-600 font-medium cursor-pointer">
                     Categories
                   </span>
-                  <span className="text-slate-700 hover:text-brand-600 font-medium cursor-pointer">
+                  <Link href="/about" className="text-slate-700 hover:text-brand-600 font-medium">
                     About
-                  </span>
-                  <span className="text-slate-700 hover:text-brand-600 font-medium cursor-pointer">
+                  </Link>
+                  <Link href="/contact" className="text-slate-700 hover:text-brand-600 font-medium">
                     Contact
-                  </span>
+                  </Link>
                   
                   {isAuthenticated && (
                     <>
