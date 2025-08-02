@@ -70,7 +70,7 @@ export default function Header() {
                 {/* Create Post Button */}
                 <Button onClick={() => navigate("/create")}>
                   <i className="fas fa-plus mr-2"></i>
-                  Create Post
+                  Create
                 </Button>
 
                 {/* User Menu */}
@@ -148,7 +148,7 @@ export default function Header() {
                       <div className="border-t pt-4">
                         <Button onClick={() => navigate("/create")} className="w-full mb-2">
                           <i className="fas fa-plus mr-2"></i>
-                          Create Post
+                          Create
                         </Button>
                         {(user as any)?.isAdmin && (
                           <Button 

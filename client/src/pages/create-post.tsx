@@ -129,6 +129,7 @@ export default function CreatePost() {
     formData.append('content', content);
     formData.append('categoryId', categoryId);
     formData.append('published', 'true');
+    formData.append('type', 'post');
     
     if (coverImage) {
       formData.append('coverImage', coverImage);

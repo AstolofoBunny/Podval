@@ -51,6 +51,7 @@ export default function CreateArticle() {
       const response = await fetch("/api/posts", {
         method: "POST",
         body: data,
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error(`${response.status}: ${response.statusText}`);
@@ -118,6 +119,7 @@ export default function CreateArticle() {
     submitData.append("content", formData.content);
     submitData.append("categoryId", formData.categoryId);
     submitData.append("type", "article");
+    submitData.append("published", "true");
     
     images.forEach((image, index) => {
       submitData.append(`images`, image);

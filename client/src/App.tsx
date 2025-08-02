@@ -10,6 +10,7 @@ import Home from "@/pages/home";
 import PostDetail from "@/pages/post-detail";
 import CreatePost from "@/pages/create-post";
 import CreateArticle from "@/pages/create-article";
+import CreateContent from "@/pages/create-content";
 import Profile from "@/pages/profile";
 import MyPosts from "@/pages/my-posts";
 import About from "@/pages/about";
@@ -39,7 +40,8 @@ function Router() {
         <>
           <Route path="/" component={Home} />
           <Route path="/post/:id" component={PostDetail} />
-          <Route path="/create" component={CreatePost} />
+          <Route path="/create" component={CreateContent} />
+          <Route path="/create-post" component={CreatePost} />
           <Route path="/create-article" component={CreateArticle} />
           <Route path="/profile" component={Profile} />
           <Route path="/my-posts" component={MyPosts} />

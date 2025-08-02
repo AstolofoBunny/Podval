@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/dist/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/$1"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database-url",
+    "SESSION_SECRET": "@session-secret",
+    "REPL_ID": "@repl-id",
+    "REPLIT_DOMAINS": "@replit-domains",
+    "ISSUER_URL": "@issuer-url"
+  }
+}
