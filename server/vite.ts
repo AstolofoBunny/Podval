@@ -1,37 +1,22 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { createServer as createViteServer } from "vite";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { Express } from "express";
 
-export default defineConfig({
-  plugins: [
-    react(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-        ]
-      : []),
-  ],
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
-    },
-  },
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
-  },
-});
+export async function setupVite(app: Express) {
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    root: path.resolve(__dirname, "../client"),
+    appType: "custom",
+  });
+
+  app.use(vite.middlewares);
+}
+
+export function serveStatic(app: Express) {
+  const staticPath = path.resolve(__dirname, "../dist/public");
+  app.use(require("express").static(staticPath));
+}
+
+export function log(msg: string) {
+  console.log(`[SERVER] ${msg}`);
+}
