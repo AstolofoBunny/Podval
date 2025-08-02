@@ -33,6 +33,8 @@ export default defineConfig(async () => {
         strict: true,
         deny: ["**/.*"],
       },
+      allowedHosts: "all", // ← добавь вот эту строку!
     },
   };
+});
 });
