@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { isUnauthorizedError } from "@/lib/authUtils";
+import BackButton from "@/components/back-button";
 
 export default function MyPosts() {
   const { user, isAuthenticated, isLoading } = useAuth();
@@ -65,6 +66,7 @@ export default function MyPosts() {
   return (
     <div className="min-h-screen bg-slate-50 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BackButton />
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>

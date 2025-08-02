@@ -16,6 +16,7 @@ import MyPosts from "@/pages/my-posts";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
+import FirebaseTest from "@/pages/firebase-test";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -48,6 +49,7 @@ function Router() {
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/admin" component={Admin} />
+          <Route path="/firebase-test" component={FirebaseTest} />
         </>
       )}
       <Route component={NotFound} />

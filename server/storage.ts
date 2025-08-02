@@ -34,6 +34,7 @@ export interface IStorage {
 
   // Category operations
   getCategories(): Promise<Category[]>;
+  getCategoryByName(name: string): Promise<Category | undefined>;
   createCategory(category: InsertCategory): Promise<Category>;
   updateCategory(id: string, category: Partial<InsertCategory>): Promise<Category>;
   deleteCategory(id: string): Promise<void>;
@@ -109,6 +110,11 @@ export class DatabaseStorage implements IStorage {
   // Category operations
   async getCategories(): Promise<Category[]> {
     return await db.select().from(categories).orderBy(categories.name);
+  }
+
+  async getCategoryByName(name: string): Promise<Category | undefined> {
+    const [category] = await db.select().from(categories).where(eq(categories.name, name));
+    return category;
   }
 
   async createCategory(category: InsertCategory): Promise<Category> {

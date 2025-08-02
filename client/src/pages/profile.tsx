@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { apiRequest } from "@/lib/queryClient";
 import { isUnauthorizedError } from "@/lib/authUtils";
+import BackButton from "@/components/back-button";
 
 export default function Profile() {
   const { user, isAuthenticated, isLoading } = useAuth();
@@ -117,6 +118,7 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-slate-50 py-8">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BackButton />
         <Card>
           <CardHeader>
             <CardTitle>Profile Settings</CardTitle>

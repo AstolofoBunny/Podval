@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { isUnauthorizedError } from "@/lib/authUtils";
+import BackButton from "@/components/back-button";
 import { useLocation } from "wouter";
 
 export default function CreateArticle() {
@@ -153,6 +154,7 @@ export default function CreateArticle() {
   return (
     <div className="min-h-screen bg-slate-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BackButton />
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">

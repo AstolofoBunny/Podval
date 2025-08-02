@@ -212,8 +212,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/posts', isAuthenticated, upload.single('coverImage'), async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
+      
+      // Handle category - create "Other" if not specified or doesn't exist
+      let categoryId = req.body.categoryId;
+      if (!categoryId || categoryId === '') {
+        let otherCategory = await storage.getCategoryByName('Other');
+        if (!otherCategory) {
+          otherCategory = await storage.createCategory({
+            name: 'Other',
+            description: 'Разные темы и общие посты',
+            color: 'gray',
+            isDefault: true
+          });
+        }
+        categoryId = otherCategory.id;
+      }
+      
       const data = insertPostSchema.parse({
         ...req.body,
+        categoryId,
         authorId: userId,
         coverImage: req.file ? `/uploads/${req.file.filename}` : null,
       });
