@@ -23,8 +23,12 @@
       "dest": "/server/index.ts"
     },
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(js|css|png|jpg|svg|json|ico|woff2?))",
       "dest": "/dist/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/public/index.html"
     }
   ],
   "env": {
