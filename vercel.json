@@ -2,32 +2,29 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "client/dist/public"
-      }
-    },
-    {
       "src": "server/index.ts",
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["server/**"]
       }
+    },
+    {
+      "src": "dist/public/**/*",
+      "use": "@vercel/static"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/server/index.ts"
+      "src": "/api/(.*)",
+      "dest": "/server/index.ts"
     },
     {
-      "source": "/uploads/(.*)",
-      "destination": "/server/index.ts"
+      "src": "/uploads/(.*)",
+      "dest": "/server/index.ts"
     },
     {
-      "source": "/(.*)",
-      "destination": "/client/dist/public/index.html"
+      "src": "/(.*)",
+      "dest": "/dist/public/$1"
     }
   ],
   "env": {
@@ -39,3 +36,4 @@
     "PGPASSWORD": "npg_ZM3j1GeFNyRH"
   }
 }
+
