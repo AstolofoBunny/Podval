@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "dist/public/**/*",
+      "src": "dist/public/**",
       "use": "@vercel/static"
     }
   ],
@@ -23,11 +23,10 @@
       "dest": "server/index.ts"
     },
     {
-      "src": "/(.*\\.(js|css|png|jpg|svg|json|ico|woff2?))",
-      "dest": "dist/public/$1"
+      "handle": "filesystem"
     },
     {
-      "src": "/(.*)",
+      "src": "/.*",
       "dest": "dist/public/index.html"
     }
   ],
