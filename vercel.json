@@ -2,22 +2,28 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
+      "src": "package.json",
+      "use": "@vercel/static",
+      "config": {
+        "distDir": "client/dist/public"
+      }
     },
     {
-      "src": "client/dist/**",
-      "use": "@vercel/static"
+      "src": "server/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["server/**"]
+      }
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/dist/index.js"
+      "destination": "/server/index.ts"
     },
     {
       "source": "/uploads/(.*)",
-      "destination": "/dist/index.js"
+      "destination": "/server/index.ts"
     },
     {
       "source": "/(.*)",
