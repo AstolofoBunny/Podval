@@ -31,12 +31,12 @@
     }
   ],
   "env": {
-    "DATABASE_URL": "postgresql://neondb_owner:npg_ZM3j1GeFNyRH@ep-small-breeze-a25z1x7x.eu-central-1.aws.neon.tech/neondb?sslmode=require",
+    "DATABASE_URL": "postgresql://neondb_owner:npg_3gdZcoGIJC0q@ep-damp-water-a23l5t5q-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
     "PGDATABASE": "neondb",
-    "PGHOST": "ep-small-breeze-a25z1x7x.eu-central-1.aws.neon.tech",
+    "PGHOST": "ep-damp-water-a23l5t5q-pooler.eu-central-1.aws.neon.tech",
     "PGPORT": "5432",
     "PGUSER": "neondb_owner",
-    "PGPASSWORD": "npg_ZM3j1GeFNyRH"
+    "PGPASSWORD": "npg_3gdZcoGIJC0q"
   }
 }
 
